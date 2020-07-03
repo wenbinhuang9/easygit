@@ -1,11 +1,26 @@
 require "open3"
 module EasyGit
 
-    def self.branch_info
+    # todo give full branch info
+    def self.merged_branchs
         command = 'git branch --merged master'
         info = command_to_a(command)
         info
+    end
+    def self.merged_branchs_info
+    end
+    # todo giving a branch name here 
+    def self.branch_info(branch_name) 
+        command =  command = %Q(git log -n1 --date=short --format=format:"%cd %n %h %n %an %n %s" #{branch_name})
+
+        info = command_to_a(command)
+        info
         puts info
+    end
+
+    # input is  list branch detail info 
+    def self.format 
+
     end
 
     def self.command_to_a(command) command_output(command).split($/).map(&:strip) end 
